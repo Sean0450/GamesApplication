@@ -1,13 +1,13 @@
 #include "GameSwitcher.h"
 
+#include <span>
 GameSwitcher::GameSwitcher(QWidget * parent)
   : QWidget(parent)
 {
   m_gamesList = new QComboBox(this);
-  for (auto && game : resources::gamesNames)
-  {
-    m_gamesList->addItem(game);
-  }
+  m_gamesList->addItem(resources::GamesNames::ticTacToe);
+  m_gamesList->addItem(resources::GamesNames::tags);
+  m_gamesList->addItem(resources::GamesNames::shipsBatle);
   m_chooseGame = new QPushButton(this);
   m_chooseGame->setText(resources::startGame);
   QObject::connect(m_chooseGame, &QPushButton::clicked, this, &GameSwitcher::ChooseGameButtonClicked);

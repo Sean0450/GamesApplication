@@ -5,17 +5,21 @@
 #include "GameArea.h"
 #include "GameSwitcher.h"
 #include "ui_GamesApplication.h"
+#include "TicTacToePanel.h"
 
 class View : public QMainWindow
 {
   Q_OBJECT
   GameSwitcher * m_gameSwitcher = nullptr;
   GameArea * m_gameArea = nullptr;
-
+  GameInformationPanel * m_gamePanel = nullptr;
+  QHBoxLayout * m_mainLayout = nullptr;
+  QVBoxLayout * m_panelLayout = nullptr;
 public:
   View(QWidget * parent = nullptr);
   GameSwitcher * GetGameSwitcher() const;
   GameArea * GetGameArea() const;
+  void ConstructGameArea(GamesTypes gameType);
   ~View() = default;
 
 private:

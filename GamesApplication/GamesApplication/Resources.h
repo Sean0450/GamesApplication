@@ -1,10 +1,15 @@
 #pragma once
 
-#include <array>
 #include <string>
 
 namespace resources
 {
-constexpr std::array<const char*, 3> gamesNames = {"TicTacToe", "Tags", "ShipsBatle"};
+struct GamesNames
+{
+  static constexpr auto ticTacToe{"TicTacToe"};
+  static constexpr auto tags{"Tags"};
+  static constexpr auto shipsBatle {"ShipsBatle"};
+
+};
 constexpr auto startGame = "Start game";
 }
