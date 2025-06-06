@@ -108,7 +108,8 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DataModel.cpp" />
     <ClCompile Include="GameArea.cpp" />
-    <ClCompile Include="TicTacToePanel.cpp" />
+    <ClCompile Include="GameInformationPanel.cpp" />
+    <ClCompile Include="TicTacToe.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="GameSwitcher.cpp" />
     <ClCompile Include="main.cpp" />
@@ -119,7 +120,8 @@
   <ItemGroup>
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DataModel.h" />
-    <QtMoc Include="TicTacToePanel.h" />
+    <ClInclude Include="Dialoges.h" />
+    <ClInclude Include="TicTacToe.h" />
     <QtMoc Include="GameArea.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameAreaObserver.h" />

@@ -8,7 +8,7 @@ enum class GamesTypes
 {
   TicTacToe,
   Tags,
-  ShipsBattle
+  Sudoku
 };
 
 class GameArea : public QWidget

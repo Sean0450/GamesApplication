@@ -8,8 +8,12 @@ struct GamesNames
 {
   static constexpr auto ticTacToe{"TicTacToe"};
   static constexpr auto tags{"Tags"};
-  static constexpr auto shipsBatle {"ShipsBatle"};
-
+  static constexpr auto sudoku{"Sudoku"};
 };
 constexpr auto startGame = "Start game";
-}
+constexpr auto dialogeTitle = "Input player name Dialoge";
+constexpr auto firstPlayerQuestion = "Enter player Name:";
+constexpr auto secondPlayerQuestion = "Enter second player Name:";
+constexpr auto gameInformation = "Game information";
+constexpr auto isWinner = " is winner!";
+} // namespace resources

@@ -15,6 +15,7 @@ void Controller::SendChoosenGame(const std::string & choosenGame)
 {
   if (choosenGame == resources::GamesNames::ticTacToe)
   {
+    m_activeGame = std::make_unique<TicTacToe>();
     m_view->ConstructGameArea(GamesTypes::TicTacToe);
   }
   else if (choosenGame == resources::GamesNames::tags)
@@ -23,15 +24,22 @@ void Controller::SendChoosenGame(const std::string & choosenGame)
   }
   else
   {
-    m_view->ConstructGameArea(GamesTypes::ShipsBattle);
+    m_view->ConstructGameArea(GamesTypes::Sudoku);
   }
 }
 
-void Controller::SendData(char x, char y, const std::optional<char> & optionalCell)
+std::optional<uint8_t> Controller::SendData(uint8_t cellIndex, const std::optional<uint8_t> & optionalCell)
 {
+  auto stepResult = m_activeGame->Step(cellIndex, optionalCell);
+  auto data = m_activeGame->GetWinnerInformation();
+  if (!data.empty())
+  {
+    m_view->GetInformationPanel()->UpdateStatistics(data);
+  }
+  return stepResult;
 }
 
-void Controller::SendPlayersNames(std::string_view firstPlayer, std::string_view secondPlayer)
+void Controller::SendPlayerName(const std::string & playerName)
 {
-
+  m_activeGame->SetName(playerName);
 }

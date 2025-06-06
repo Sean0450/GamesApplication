@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     std::weak_ptr<Controller> weakFromController(controller);
     view->GetGameSwitcher()->SetObserver(weakFromController);
     view->GetGameArea()->SetObserver(weakFromController);
+    view->GetInformationPanel()->SetObserver(weakFromController);
     view->show();
     return a.exec();
 }

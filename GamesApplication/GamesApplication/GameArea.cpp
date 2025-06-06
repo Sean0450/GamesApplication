@@ -10,8 +10,8 @@ void GameArea::ConstructGameArea(GamesTypes gameType)
 {
   if (m_area != nullptr)
   {
-    m_area->deleteLater();
     m_mainLayout->removeWidget(m_area);
+    m_area->deleteLater();
   }
   switch (gameType)
   {
@@ -25,16 +25,19 @@ void GameArea::ConstructGameArea(GamesTypes gameType)
       m_activeGame = GamesTypes::Tags;
       CreateArea(4);
       break;
-    case GamesTypes::ShipsBattle:
-      m_area = new QTableWidget(10, 10, this);
-      m_activeGame = GamesTypes::ShipsBattle;
-      CreateArea(10);
+    case GamesTypes::Sudoku:
+      m_area = new QTableWidget(9, 9, this);
+      m_activeGame = GamesTypes::Sudoku;
+      CreateArea(9);
       break;
   }
   m_area->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
   m_area->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-  m_area->verticalHeader()->setVisible(false);
-  m_area->horizontalHeader()->setVisible(false);
+  if (m_activeGame != GamesTypes::Sudoku)
+  {
+    m_area->verticalHeader()->setVisible(false);
+    m_area->horizontalHeader()->setVisible(false);
+  }
   m_mainLayout->addWidget(m_area);
 }
 
@@ -55,29 +58,22 @@ void GameArea::CreateArea(uint8_t size)
       button->setFlat(true);
       m_area->setCellWidget(rows, columns, button);
       m_buttons.emplace_back(button);
-      switch (m_activeGame)
-      {
-        case GamesTypes::TicTacToe:
-          QObject::connect(button, &QPushButton::clicked, this, &GameArea::TicTacToeButtonClicked);
-          break;
-        case GamesTypes::Tags:
-          QObject::connect(button, &QPushButton::clicked, this, &GameArea::TagsButtonClicked);
-          break;
-        case GamesTypes::ShipsBattle:
-          QObject::connect(button, &QPushButton::clicked, this, &GameArea::ShipBattleButtonClicked);
-      }
+      QObject::connect(button, &QPushButton::clicked, this, &GameArea::TicTacToeButtonClicked);
     }
   }
 }
 
 void GameArea::TicTacToeButtonClicked()
 {
-  auto index = std::distance(m_buttons.begin(), std::ranges::find(m_buttons, sender()));
-  int row = index / 3;
   if (auto observer = m_observer.lock())
   {
-    observer->SendData(row, index - 3 * row, std::nullopt);
-    //Set Icon
+    auto index = std::distance(m_buttons.begin(), std::ranges::find(m_buttons, sender()));
+    auto stepResult = observer->SendData(index, std::nullopt);
+    if (stepResult.has_value())
+    {
+      m_buttons[index]->setText(stepResult == 1 ? "X" : "O");
+      m_buttons[index]->setFont(QFont("Arial", 20, QFont::Bold));
+    }
   }
 }
 
@@ -88,3 +84,4 @@ void GameArea::TagsButtonClicked()
 void GameArea::ShipBattleButtonClicked()
 {
 }
+

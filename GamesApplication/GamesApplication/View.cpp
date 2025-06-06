@@ -8,12 +8,14 @@ View::View(QWidget * parent)
 
   m_gameSwitcher = new GameSwitcher(this);
   m_gameArea = new GameArea(this);
+  m_gamePanel = new GameInformationPanel(this);
   m_mainLayout = new QHBoxLayout(ui.centralWidget);
   auto gamesLayout = new QVBoxLayout(ui.centralWidget);
   gamesLayout->addWidget(m_gameArea);
   auto switcherLayout = new QVBoxLayout(ui.centralWidget);
   switcherLayout->addWidget(m_gameSwitcher);
   m_panelLayout = new QVBoxLayout(this);
+  m_panelLayout->addWidget(m_gamePanel);
   m_mainLayout->addLayout(m_panelLayout);
   m_mainLayout->addLayout(gamesLayout);
   m_mainLayout->addLayout(switcherLayout);
@@ -22,21 +24,7 @@ View::View(QWidget * parent)
 void View::ConstructGameArea(GamesTypes gameType)
 {
   m_gameArea->ConstructGameArea(gameType);
-  if (m_gamePanel != nullptr)
-  {
-    m_gamePanel->deleteLater();
-  }
-  switch (gameType)
-  {
-    case GamesTypes::TicTacToe:
-      m_gamePanel = new TicTacToePanel(this); 
-      break;
-    case GamesTypes::Tags:
-      break;
-    case GamesTypes::ShipsBattle:
-      std::cout << "N";
-  }
-  m_panelLayout->addWidget(m_gamePanel);
+  m_gamePanel->ConstructGamePanel(gameType);
 }
 
 GameSwitcher * View::GetGameSwitcher() const
@@ -47,4 +35,9 @@ GameSwitcher * View::GetGameSwitcher() const
 GameArea * View::GetGameArea() const
 {
   return m_gameArea;
+}
+
+GameInformationPanel * View::GetInformationPanel() const
+{
+  return m_gamePanel;
 }

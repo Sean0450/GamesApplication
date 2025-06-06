@@ -5,5 +5,5 @@
 struct GameAreaObserver
 {
   virtual ~GameAreaObserver() = default;
-  virtual void SendData(char x, char y, const std::optional<char> & optionalCell) = 0;
+  virtual std::optional<uint8_t> SendData(uint8_t cellIndex, const std::optional<uint8_t> & optionalCell) = 0;
 };

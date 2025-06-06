@@ -7,7 +7,7 @@ GameSwitcher::GameSwitcher(QWidget * parent)
   m_gamesList = new QComboBox(this);
   m_gamesList->addItem(resources::GamesNames::ticTacToe);
   m_gamesList->addItem(resources::GamesNames::tags);
-  m_gamesList->addItem(resources::GamesNames::shipsBatle);
+  m_gamesList->addItem(resources::GamesNames::sudoku);
   m_chooseGame = new QPushButton(this);
   m_chooseGame->setText(resources::startGame);
   QObject::connect(m_chooseGame, &QPushButton::clicked, this, &GameSwitcher::ChooseGameButtonClicked);

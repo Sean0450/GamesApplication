@@ -52,7 +52,10 @@
     <ClCompile Include="GameArea.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TicTacToePanel.cpp">
+    <ClCompile Include="GameInformationPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TicTacToe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -64,9 +67,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="GameInformationPanel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="TicTacToePanel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -90,6 +90,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TicTacToe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialoges.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
