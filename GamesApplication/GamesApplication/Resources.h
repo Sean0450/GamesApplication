@@ -16,4 +16,5 @@ constexpr auto firstPlayerQuestion = "Enter player Name:";
 constexpr auto secondPlayerQuestion = "Enter second player Name:";
 constexpr auto gameInformation = "Game information";
 constexpr auto isWinner = " is winner!";
+constexpr auto pressToRestart = "Press to restart the game";
 } // namespace resources

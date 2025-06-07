@@ -55,7 +55,7 @@ void GameArea::CreateArea(uint8_t size)
     for (uint8_t columns = 0; columns < size; ++columns)
     {
       auto * button = new QPushButton(this);
-      button->setFlat(true);
+      //button->setFlat(true);
       m_area->setCellWidget(rows, columns, button);
       m_buttons.emplace_back(button);
       QObject::connect(button, &QPushButton::clicked, this, &GameArea::TicTacToeButtonClicked);
@@ -85,3 +85,27 @@ void GameArea::ShipBattleButtonClicked()
 {
 }
 
+
+void GameArea::Restart()
+{
+  switch (m_activeGame)
+  {
+    case GamesTypes::TicTacToe:
+      std::ranges::for_each(m_buttons,
+                            [&](auto * button)
+                            {
+                              button->setEnabled(true);
+                              button->setText("");
+                            });
+      break;
+    case GamesTypes::Tags:
+      break;
+    case GamesTypes::Sudoku:
+      break;
+  }
+}
+
+void GameArea::BlockGameArea()
+{
+  std::ranges::for_each(m_buttons, [&](auto * button) { button->setEnabled(false); });
+}

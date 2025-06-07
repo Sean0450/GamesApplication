@@ -7,6 +7,8 @@
 #include "GameInformationPanelObserver.h"
 #include "GameArea.h"
 #include "Resources.h"
+#include "Dialoges.h"
+
 
 class GameInformationPanel : public QWidget
 {

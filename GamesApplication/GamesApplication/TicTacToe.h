@@ -1,9 +1,9 @@
 #pragma once
 
 #include <array>
+#include <algorithm>
 
 #include "Game.h"
-#include "Dialoges.h"
 
 
 struct WinningCombo
@@ -35,4 +35,5 @@ public:
   std::optional<uint8_t> Step(uint8_t cellIndex, const std::optional<uint8_t> & optionalCell) override;
   void SetName(const std::string & playerName) override;
   const std::string & GetWinnerInformation() override;
+  void RestartGame() override;
 };

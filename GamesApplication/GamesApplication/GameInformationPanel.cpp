@@ -63,4 +63,5 @@ void GameInformationPanel::UpdateStatistics(const std::string & playerStatistics
     case GamesTypes::Sudoku:
       break;
   }
+  dialoges::outputDialoge(playerStatistics);
 }

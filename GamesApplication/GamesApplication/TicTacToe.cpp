@@ -50,12 +50,15 @@ const std::string & TicTacToe::GetWinnerInformation()
   if (CheckWinner())
   {
     if (m_firstPlayerData.second)
-    {
-      dialoges::outputDialoge(m_secondPlayerData.first); //std::swap() in Step function calls earliaer so I have to use reverse data
-      return m_secondPlayerData.first;
+    { 
+      return m_secondPlayerData.first; //std::swap() in Step function calls earliaer so I have to use reverse data
     }
-    dialoges::outputDialoge(m_firstPlayerData.first);
     return m_firstPlayerData.first;
   }
   return {};
+}
+
+void TicTacToe::RestartGame()
+{
+  std::ranges::for_each(m_gameArea, [&](auto & element) { element = -1; });
 }

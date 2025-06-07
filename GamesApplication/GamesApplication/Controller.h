@@ -28,4 +28,5 @@ public:
   void SendChoosenGame(const std::string & currentGame) override;
   std::optional<uint8_t> SendData(uint8_t cellIndex, const std::optional<uint8_t> & optionalCell) override;
   void SendPlayerName(const std::string & playerName) override;
+  void RestartGame() override;
 };

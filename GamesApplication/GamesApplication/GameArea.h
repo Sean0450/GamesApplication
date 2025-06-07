@@ -30,4 +30,6 @@ public:
   GameArea(QWidget * parent = nullptr);
   void SetObserver(std::weak_ptr<GameAreaObserver> observer);
   void ConstructGameArea(GamesTypes gameType);
+  void Restart();
+  void BlockGameArea();
 };

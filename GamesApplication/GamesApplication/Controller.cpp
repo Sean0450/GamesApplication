@@ -35,6 +35,7 @@ std::optional<uint8_t> Controller::SendData(uint8_t cellIndex, const std::option
   if (!data.empty())
   {
     m_view->GetInformationPanel()->UpdateStatistics(data);
+    m_view->GetGameArea()->BlockGameArea();
   }
   return stepResult;
 }
@@ -42,4 +43,10 @@ std::optional<uint8_t> Controller::SendData(uint8_t cellIndex, const std::option
 void Controller::SendPlayerName(const std::string & playerName)
 {
   m_activeGame->SetName(playerName);
+}
+
+void Controller::RestartGame()
+{
+  m_view->GetGameArea()->Restart();
+  m_activeGame->RestartGame();
 }
