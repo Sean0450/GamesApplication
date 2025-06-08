@@ -9,6 +9,7 @@
 #include "GameInformationPanelObserver.h"
 #include "GameSwitcherObserver.h"
 #include "View.h"
+#include "Sudoku.h"
 
 class Controller : public GameSwitcherObserver,
                    public GameAreaObserver,
@@ -21,6 +22,7 @@ class Controller : public GameSwitcherObserver,
   std::shared_ptr<View> m_view;
   std::unique_ptr<Game> m_activeGame;
   DataModel m_dataModel;
+  void StartSudokuGame();
 
 public:
   Controller(Private priv, std::shared_ptr<View> view);

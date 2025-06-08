@@ -4,8 +4,7 @@ View::View(QWidget * parent)
   : QMainWindow(parent)
 {
   ui.setupUi(this);
-  this->setWindowTitle("BEST PROJECT IN THE WORLD");
-
+  this->setWindowTitle(resources::applicationTitle);
   m_gameSwitcher = new GameSwitcher(this);
   m_gameArea = new GameArea(this);
   m_gamePanel = new GameInformationPanel(this);

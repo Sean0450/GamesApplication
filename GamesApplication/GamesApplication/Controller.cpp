@@ -13,6 +13,7 @@ std::shared_ptr<Controller> Controller::Create(std::shared_ptr<View> view)
 
 void Controller::SendChoosenGame(const std::string & choosenGame)
 {
+  m_view->GetGameArea()->ClearGameArea();
   if (choosenGame == resources::GamesNames::ticTacToe)
   {
     m_activeGame = std::make_unique<TicTacToe>();
@@ -24,7 +25,9 @@ void Controller::SendChoosenGame(const std::string & choosenGame)
   }
   else
   {
+    m_activeGame = std::make_unique<Sudoku>();
     m_view->ConstructGameArea(GamesTypes::Sudoku);
+    StartSudokuGame();
   }
 }
 
@@ -49,4 +52,13 @@ void Controller::RestartGame()
 {
   m_view->GetGameArea()->Restart();
   m_activeGame->RestartGame();
+  StartSudokuGame();
+}
+
+void Controller::StartSudokuGame()
+{
+  if (auto sudoku = dynamic_cast<Sudoku *>(m_activeGame.get()))
+  {
+    m_view->GetGameArea()->FillGameArea(sudoku->GetUserArea());
+  }
 }

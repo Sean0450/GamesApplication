@@ -18,6 +18,8 @@ class GameInformationPanel : public QWidget
   QLabel * m_secondPlayerData = nullptr;
   GamesTypes m_currentGame;
 
+  QLabel * FillLabel(QLabel * label);
+
 public:
   GameInformationPanel(QWidget * parent = nullptr);
   void SendPlayerName(const std::string & labelText);
