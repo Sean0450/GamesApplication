@@ -110,6 +110,7 @@
     <ClCompile Include="GameArea.cpp" />
     <ClCompile Include="GameInformationPanel.cpp" />
     <ClCompile Include="Sudoku.cpp" />
+    <ClCompile Include="Tags.cpp" />
     <ClCompile Include="TicTacToe.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="GameSwitcher.cpp" />
@@ -122,7 +123,9 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DataModel.h" />
     <ClInclude Include="Dialoges.h" />
+    <ClInclude Include="FieldedAreaGame.h" />
     <ClInclude Include="Sudoku.h" />
+    <ClInclude Include="Tags.h" />
     <ClInclude Include="TicTacToe.h" />
     <QtMoc Include="GameArea.h" />
     <ClInclude Include="Game.h" />

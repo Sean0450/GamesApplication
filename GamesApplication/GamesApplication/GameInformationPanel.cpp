@@ -43,6 +43,7 @@ void GameInformationPanel::UpdateStatistics(const std::string & playerStatistics
   switch (m_currentGame)
   {
     case GamesTypes::TicTacToe:
+    {
       if (splitData[0].toStdString() == playerStatistics)
       {
         auto newScore = splitData[1].toInt() + 1;
@@ -54,15 +55,22 @@ void GameInformationPanel::UpdateStatistics(const std::string & playerStatistics
         auto newScore = m_secondPlayerData->text().split(":")[1].toInt() + 1;
         m_secondPlayerData->setText(m_secondPlayerData->text().split(":")[0] + ":" + QString::number(newScore));
       }
-      dialoges::outputDialoge(playerStatistics, "");
+      dialoges::outputDialoge(playerStatistics, {});
       break;
+    }
     case GamesTypes::Tags:
+    {
+      auto splitInfo = QString::fromStdString(playerStatistics).split(":");
+      dialoges::outputDialoge(splitData[0].toStdString(), resources::youMade + splitInfo[1].toStdString() + resources::steps);
       break;
+    }
     case GamesTypes::Sudoku:
+    {
       auto splitInfo = QString::fromStdString(playerStatistics).split(":");
       dialoges::outputDialoge(splitInfo[0].toStdString(), resources::yourScore + splitInfo[1].toStdString() + "\n" +
                                                             resources::mistakesCount + splitInfo[2].toStdString());
       m_firstPlayerData->setText(splitData[0] + ":" + QString::number(splitInfo[1].toInt() + splitData[1].toInt()));
+    }
   }
 }
 

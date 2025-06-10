@@ -4,10 +4,9 @@
 #include <algorithm>
 #include <string>
 
-#include "Game.h"
+#include "FieldedAreaGame.h"
 
-
-class Sudoku : public Game
+class Sudoku : public FieldedAreaGame
 {
   std::string m_name;
   uint16_t m_score = 0;
@@ -37,7 +36,7 @@ public:
   Sudoku();
   std::optional<uint8_t> Step(uint8_t cellIndex, const std::optional<uint8_t> & optionalCell) override;
   void SetName(const std::string & playerName) override;
-  const std::string GetWinnerInformation() override;
+  std::string GetWinnerInformation() override;
   void RestartGame() override;
-  std::array<std::array<uint8_t, 9>, 9> GetUserArea() const;
+  std::vector<uint8_t> GetUserArea() const override;
 };

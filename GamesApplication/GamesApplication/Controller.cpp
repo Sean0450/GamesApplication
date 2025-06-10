@@ -14,6 +14,8 @@ std::shared_ptr<Controller> Controller::Create(std::shared_ptr<View> view)
 void Controller::SendChoosenGame(const std::string & choosenGame)
 {
   m_view->GetGameArea()->ClearGameArea();
+  m_activeGame.reset();
+  m_fieldedActiveGame.reset();
   if (choosenGame == resources::GamesNames::ticTacToe)
   {
     m_activeGame = std::make_unique<TicTacToe>();
@@ -21,20 +23,32 @@ void Controller::SendChoosenGame(const std::string & choosenGame)
   }
   else if (choosenGame == resources::GamesNames::tags)
   {
+    m_fieldedActiveGame = std::make_unique<Tags>();
     m_view->ConstructGameArea(GamesTypes::Tags);
+    m_view->GetGameArea()->FillGameArea(m_fieldedActiveGame->GetUserArea());
   }
   else
   {
-    m_activeGame = std::make_unique<Sudoku>();
+    m_fieldedActiveGame = std::make_unique<Sudoku>();
     m_view->ConstructGameArea(GamesTypes::Sudoku);
-    StartSudokuGame();
+    m_view->GetGameArea()->FillGameArea(m_fieldedActiveGame->GetUserArea());
   }
 }
 
 std::optional<uint8_t> Controller::SendData(uint8_t cellIndex, const std::optional<uint8_t> & optionalCell)
 {
-  auto stepResult = m_activeGame->Step(cellIndex, optionalCell);
-  auto data = m_activeGame->GetWinnerInformation();
+  std::optional<uint8_t> stepResult;
+  std::string data;
+  if (m_activeGame != nullptr)
+  {
+    stepResult = m_activeGame->Step(cellIndex, optionalCell);
+    data = m_activeGame->GetWinnerInformation();
+  }
+  else
+  {
+    stepResult = m_fieldedActiveGame->Step(cellIndex, optionalCell);
+    data = m_fieldedActiveGame->GetWinnerInformation();
+  }
   if (!data.empty())
   {
     m_view->GetInformationPanel()->UpdateStatistics(data);
@@ -45,20 +59,26 @@ std::optional<uint8_t> Controller::SendData(uint8_t cellIndex, const std::option
 
 void Controller::SendPlayerName(const std::string & playerName)
 {
-  m_activeGame->SetName(playerName);
+  if (m_activeGame != nullptr)
+  {
+    m_activeGame->SetName(playerName);
+  }
+  else
+  {
+    m_fieldedActiveGame->SetName(playerName);
+  }
 }
 
 void Controller::RestartGame()
 {
   m_view->GetGameArea()->Restart();
-  m_activeGame->RestartGame();
-  StartSudokuGame();
-}
-
-void Controller::StartSudokuGame()
-{
-  if (auto sudoku = dynamic_cast<Sudoku *>(m_activeGame.get()))
+  if (m_fieldedActiveGame != nullptr)
   {
-    m_view->GetGameArea()->FillGameArea(sudoku->GetUserArea());
+    m_fieldedActiveGame->RestartGame();
+    m_view->GetGameArea()->FillGameArea(m_fieldedActiveGame->GetUserArea());
+  }
+  else
+  {
+    m_activeGame->RestartGame();
   }
 }

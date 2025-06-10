@@ -45,7 +45,7 @@ bool TicTacToe::CheckWinner() const
   return false;
 }
 
-const std::string TicTacToe::GetWinnerInformation()
+std::string TicTacToe::GetWinnerInformation()
 {
   if (CheckWinner())
   {

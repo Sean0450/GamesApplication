@@ -46,20 +46,5 @@ public:
   void Restart();
   void BlockGameArea();
   void ClearGameArea();
-
-  template<uint8_t SIZE>
-  void FillGameArea(const std::array<std::array<uint8_t, SIZE>, SIZE> & data)
-  {
-    for (uint8_t i = 0; i < SIZE; ++i)
-    {
-      for (uint8_t j = 0; j < SIZE; ++j)
-      {
-        if (data[i][j] != 0)
-        {
-          m_buttons[i * SIZE + j]->setText(QString::number(data[i][j]));
-          m_buttons[i * SIZE + j]->setEnabled(false);
-        }
-      }
-    }
-  }
+  void FillGameArea(const std::vector<uint8_t> & data);
 };

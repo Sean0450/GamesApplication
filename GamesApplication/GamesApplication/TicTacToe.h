@@ -33,6 +33,6 @@ class TicTacToe : public Game
 public:
   std::optional<uint8_t> Step(uint8_t cellIndex, const std::optional<uint8_t> & optionalCell) override;
   void SetName(const std::string & playerName) override;
-  const std::string GetWinnerInformation() override;
+  std::string GetWinnerInformation() override;
   void RestartGame() override;
 };

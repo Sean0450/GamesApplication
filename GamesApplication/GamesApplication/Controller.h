@@ -4,12 +4,14 @@
 #include <string>
 
 #include "DataModel.h"
-#include "TicTacToe.h"
 #include "GameAreaObserver.h"
 #include "GameInformationPanelObserver.h"
 #include "GameSwitcherObserver.h"
-#include "View.h"
 #include "Sudoku.h"
+#include "Tags.h"
+#include "TicTacToe.h"
+#include "View.h"
+
 
 class Controller : public GameSwitcherObserver,
                    public GameAreaObserver,
@@ -21,6 +23,7 @@ class Controller : public GameSwitcherObserver,
   };
   std::shared_ptr<View> m_view;
   std::unique_ptr<Game> m_activeGame;
+  std::unique_ptr<FieldedAreaGame> m_fieldedActiveGame;
   DataModel m_dataModel;
   void StartSudokuGame();
 

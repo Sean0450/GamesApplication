@@ -20,4 +20,6 @@ constexpr auto isWinner = " is winner!";
 constexpr auto pressToRestart = "Press to restart the game";
 constexpr auto yourScore = "Your score: ";
 constexpr auto mistakesCount = "Mistakes count: ";
+constexpr auto youMade = "You made ";
+constexpr auto steps =  "steps";
 } // namespace resources

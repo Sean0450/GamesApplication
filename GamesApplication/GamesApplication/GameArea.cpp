@@ -77,6 +77,7 @@ void GameArea::CreateArea(uint8_t size)
           QObject::connect(button, &QPushButton::clicked, this, &GameArea::TicTacToeButtonClicked);
           break;
         case GamesTypes::Tags:
+          QObject::connect(button, &QPushButton::clicked, this, &GameArea::TagsButtonClicked);
           break;
         case GamesTypes::Sudoku:
           m_buttons.back()->setStyleSheet("background-color: white");
@@ -103,6 +104,16 @@ void GameArea::TicTacToeButtonClicked()
 
 void GameArea::TagsButtonClicked()
 {
+  if (auto observer = m_observer.lock())
+  {
+    auto index = std::distance(m_buttons.begin(), std::ranges::find(m_buttons, sender()));
+    auto stepResult = observer->SendData(index, std::nullopt);
+    if (stepResult.has_value())
+    {
+      m_buttons[stepResult.value()]->setText(m_buttons[index]->text());
+      m_buttons[index]->setText("");
+    }
+  }
 }
 
 void GameArea::SudokuButtonClicked()
@@ -180,4 +191,27 @@ void SudokuData::SetNumberButtonStyle()
 void SudokuData::SetBaseButtonsStyle()
 {
   std::ranges::for_each(m_numbersButtons, [&](auto * button) { button->setStyleSheet("background-color: lightGray"); });
+}
+
+void GameArea::FillGameArea(const std::vector<uint8_t> & data)
+{
+  uint8_t rowLong = 0;
+  if (m_activeGame == GamesTypes::Sudoku)
+  {
+    rowLong = 9;
+  }
+  else
+  {
+    rowLong = 4;
+  }
+  for (uint8_t row = 0; row < rowLong; ++row)
+  {
+    for (uint8_t column = 0; column < rowLong; ++column)
+    {
+      if (data[row * rowLong + column] != 0)
+      {
+        m_buttons[row * rowLong + column]->setText(QString::number(data[row * rowLong + column]));
+      }
+    }
+  }
 }

@@ -25,7 +25,7 @@ void Sudoku::SetName(const std::string & playerName)
   m_name = playerName;
 }
 
-const std::string Sudoku::GetWinnerInformation()
+std::string Sudoku::GetWinnerInformation()
 {
   for (auto & row : m_userArea)
   {
@@ -90,9 +90,14 @@ void Sudoku::ColumnsSwapper(uint8_t columnIndex)
   }
 }
 
-std::array<std::array<uint8_t, 9>, 9> Sudoku::GetUserArea() const
+std::vector<uint8_t> Sudoku::GetUserArea() const
 {
-  return m_userArea;
+  std::vector<uint8_t> userArea(81);
+  for (uint8_t i = 0; i < 9; ++i)
+  {
+    std::ranges::copy(m_userArea[i], userArea.begin() + i * 9);
+  }
+  return userArea;
 }
 
 uint8_t Sudoku::CalculateSwappingIndex(uint8_t index) const
@@ -101,10 +106,7 @@ uint8_t Sudoku::CalculateSwappingIndex(uint8_t index) const
   {
     return index == 0 ? index + 1 : index - 1;
   }
-  else
-  {
-    return index == 3 ? index + 2 : index - 1;
-  }
+  return index == 3 ? index + 2 : index - 1;
 }
 
 void Sudoku::ConstructUserArea()
