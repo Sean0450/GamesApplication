@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NumberButton">
+        <item name="android:layout_width">wrap_content</item> <!-- или 0dp с weight -->
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:minWidth">48dp</item> <!-- Минимальная ширина -->
+        <item name="android:backgroundTint">@color/purple_200</item>
+    </style>
+</resources>
