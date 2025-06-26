@@ -42,7 +42,6 @@ void Tags::SetName(const std::string & playerName)
 
 std::string Tags::GetWinnerInformation()
 {
-  std::array<uint8_t, 16> d;
   if (m_gameArea == m_checker)
   {
     return m_playerName + ":" + std::to_string(m_stepsCount);
